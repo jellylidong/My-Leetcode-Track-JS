@@ -33,9 +33,9 @@ var recoverTree = function(root) {
         traverse(root.right);
     }
     traverse(cur);
-    console.log(n1.val + " " + n2.val);
+    // console.log(n1.val + " " + n2.val);
     tmp = n1.val;
     n1.val = n2.val;
     n2.val = tmp;
-    console.log(n1.val + " " + n2.val);
+    // console.log(n1.val + " " + n2.val);
 };
