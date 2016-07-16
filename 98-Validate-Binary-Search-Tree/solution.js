@@ -9,51 +9,34 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-// var pre = null;
-var isValidBST = function(root) {
-    // if(root === null){
-    //     return true;
-    // }
-    // if(root.left === null && root.right === null){
-    //     if(pre !== null && pre.val >= root.val){
-    //         return false;
-    //     }
-    //     else{
-    //         pre = root;
-    //         return true;
-    //     }
-        
-    // }
-    
-    // left = isValidBST(root.left);
-    // if(!left){
-    //     return false;
-    // }
-    // if(pre !== null && pre.val >= root.val)
-    //     return false;
-    // pre = root;
-    // right = isValidBST(root.right);
-    // return right;
-    
-    var stack = [];
-    var pre = null;
+
+var isValidBST = function(root){
     var cur = root;
-
-    while(cur !== null){
-        stack.push(cur);
-        cur = cur.left;
-    }
-    while(stack.length > 0){
-        cur = stack.pop();
-        if(pre !== null && pre.val >= cur.val)
-            return false;
-        pre = cur;
-        cur = cur.right;
-        while(cur !== null) {
-            stack.push(cur);
-            cur = cur.left;
+    var pre = null;
+    var isValidBST_Recursion_Helper = function(root) {
+        if (root === null) {
+            return true;
         }
+        if (root.left === null && root.right === null) {
+            if (pre !== null && pre.val >= root.val) {
+                return false;
+            }
+            else {
+                pre = root;
+                return true;
+            }
+    
+        }
+    
+        left = isValidBST_Recursion_Helper(root.left);
+        if (!left) {
+            return false;
+        }
+        if (pre !== null && pre.val >= root.val)
+            return false;
+        pre = root;
+        right = isValidBST_Recursion_Helper(root.right);
+        return right;
     }
-
-    return true;
-};
+    return isValidBST_Recursion_Helper(cur);
+}
