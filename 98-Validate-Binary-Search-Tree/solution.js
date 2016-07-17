@@ -9,34 +9,26 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-
-var isValidBST = function(root){
-    var cur = root;
+var isValidBST = function(root) {
     var pre = null;
-    var isValidBST_Recursion_Helper = function(root) {
-        if (root === null) {
+    var helper = function(root){
+        if(root === null)
             return true;
-        }
-        if (root.left === null && root.right === null) {
-            if (pre !== null && pre.val >= root.val) {
-                return false;
-            }
-            else {
+        if(root.left === null && root.right === null){
+            if(pre !== null && pre.val >=root.val)
+                return false
+            else{
                 pre = root;
                 return true;
             }
-    
         }
-    
-        left = isValidBST_Recursion_Helper(root.left);
-        if (!left) {
-            return false;
-        }
-        if (pre !== null && pre.val >= root.val)
-            return false;
+        
+        left = helper(root.left);
+        if(left === false)  return false;
+        if(pre !== null && pre.val >= root.val) return false;
         pre = root;
-        right = isValidBST_Recursion_Helper(root.right);
+        right = helper(root.right);
         return right;
     }
-    return isValidBST_Recursion_Helper(cur);
-}
+    return helper(root);
+};
