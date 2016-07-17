@@ -10,7 +10,7 @@
  * @return {void} Do not return anything, modify root in-place instead.
  */
 var flatten = function(root) {
-    
+    //preorder
     var pre = null;
     var helper = function(root){
         if(root === null)    return null;
