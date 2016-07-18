@@ -3,6 +3,11 @@
  * @return {number}
  */
 var numIslands = function(grid) {
+    
+    //method DFS, like gate and wall problem
+    //instead, we if grid[i][j] == 1, label all its neighbor 1 to 0 by DFS
+    
+    
     var UF = function(grid){
         this.m = grid.length;
         this.n = grid[0].length;
@@ -21,6 +26,7 @@ var numIslands = function(grid) {
             var r1 = this.find(p);
             var r2 = this.find(q);
             if(r1 != r2){
+                //update father's father, not p or q's father
                 if(r1 < r2) {this.arr[r1] = r2;}
                 else    {this.arr[r2] = r1;}
                 this.amount--;
