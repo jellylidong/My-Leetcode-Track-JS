@@ -38,22 +38,26 @@ var numSquares = function(n) {
     
     
     //method 3 BFS
-    var sqrSet = [];
-    var count = new Map();
+    var sqrSet = []; //all sqr numbers that are <= n
+    var count = new Map(); // key:num, val:min sqr count
     for(let i = 0; i*i <= n; i++){
         sqrSet.push(i*i);
         count.set(i*i, 1);
     }
     if(count.has(n))    return 1;
     var q = [];
-    sqrSet.forEach(function(value){q.push(value)});
+    sqrSet.forEach(function(value){q.push(value)});//the first level is the numbers in sqrSet
     var curCount = 1;
+    
+    //n must be composed of the numbers in sqrSet
     while(q.length > 0){
-        curCount++;
+        curCount++;// for every level, add the count
         var len = q.length;
         for(let i = 0; i < len; i++){
             var num = q.shift();
             
+            //for each number in the q, sum = num + number of the sqrSet is the next numbers in the q
+            //(if sum == n, return curCount, if sum < n, put sum to q and put sum and curCount to countMap, if sum > n, stop going down)
             for(let j = 0; j < sqrSet.length; j++){
                 var value = sqrSet[j];
                 if(num + value === n)   return curCount;
