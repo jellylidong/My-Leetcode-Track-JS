@@ -23,14 +23,47 @@ var numSquares = function(n) {
     
     // return helper(n);
     
-    var dp = [];
-    for(let i = 0; i <= n; i++)
-        dp.push(Number.MAX_VALUE);
-    dp[0] = 0;
-    for(let i = 0; i <= n; i++){
-        for(let j = 1; i+j*j <= n; j++){
-            dp[i+j*j] = Math.min(dp[i+j*j], 1+dp[i]);
+    
+    //method 2 DP
+    // var dp = [];
+    // for(let i = 0; i <= n; i++)
+    //     dp.push(Number.MAX_VALUE);
+    // dp[0] = 0;
+    // for(let i = 0; i <= n; i++){
+    //     for(let j = 1; i+j*j <= n; j++){
+    //         dp[i+j*j] = Math.min(dp[i+j*j], 1+dp[i]);
+    //     }
+    // }
+    // return dp[n];
+    
+    
+    //method 3 BFS
+    var sqrSet = [];
+    var count = new Map();
+    for(let i = 0; i*i <= n; i++){
+        sqrSet.push(i*i);
+        count.set(i*i, 1);
+    }
+    if(count.has(n))    return 1;
+    var q = [];
+    sqrSet.forEach(function(value){q.push(value)});
+    var curCount = 1;
+    while(q.length > 0){
+        curCount++;
+        var len = q.length;
+        for(let i = 0; i < len; i++){
+            var num = q.shift();
+            
+            for(let j = 0; j < sqrSet.length; j++){
+                var value = sqrSet[j];
+                if(num + value === n)   return curCount;
+                else if(num+value < n && !count.has(num+value)){
+                    count.set(num+value, curCount);
+                    q.push(num+value);
+                }
+                else if(num+value > n){  break;}
+            }
         }
     }
-    return dp[n];
+    return 0;
 };
