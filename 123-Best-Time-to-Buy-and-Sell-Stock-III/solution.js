@@ -15,6 +15,7 @@ var maxProfit = function(prices) {
     }
 
     for(let i = 1; i <= k; i++){
+        //tmpMax means current max starts with i-1 the transaction and buying day j-1's stock 
         let tmpMax = dp[i-1][0] - prices[0];
         for(let j = 1; j < len; j++){
             dp[i][j] = Math.max(dp[i][j-1], tmpMax + prices[j]);
