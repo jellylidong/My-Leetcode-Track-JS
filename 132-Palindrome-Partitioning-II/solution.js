@@ -3,6 +3,10 @@
  * @return {number}
  */
 var minCut = function(s) {
+    
+    //To better understand this problem, 
+    //try test case aaaa and caaaa
+    
     var count = []; //count[i] means the min cut of s.substring(0, i+1)
     for(let i = 0; i < s.length; i++)
         count[i] = i;
