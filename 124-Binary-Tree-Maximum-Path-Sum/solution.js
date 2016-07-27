@@ -17,24 +17,17 @@
  * so we need to update max value in every recursion*/
 var maxPathSum = function(root) {
     var max = Number.NEGATIVE_INFINITY;
-    //note!!! Number.MIN_VALUE in JS is the smallest POSITIVE float number
     
-    var maxSub = function(root){
-                // console.log(max);
-
-        if(root === null)    return 0;
-        // console.log(root.val)
-        var left = Math.max(0, maxSub(root.left));
-        // console.log(left + " " + typeof left);
-        var right = Math.max(0, maxSub(root.right));
-        // console.log(right);
-        // console.log("sum = " + (left+right+root.val))
-        // console.log("premax = " + max);
-        max = Math.max(max, left+right+root.val);
-        // console.log("postmax = " + max);
-        // console.log("max = " + max);
+    var helper = function(root, curSum){
+        if(root === null)   return curSum;
+        var left = Math.max(0, helper(root.left, curSum));
+        var right = Math.max(0, helper(root.right, curSum));
+        
+        max = Math.max(max, left + root.val + right);
+        
         return root.val + Math.max(left, right);
     }
-    maxSub(root);
+    
+    helper(root, 0);
     return max;
 };
