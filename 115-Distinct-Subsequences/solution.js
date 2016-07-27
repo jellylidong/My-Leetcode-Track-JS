@@ -23,30 +23,28 @@ var numDistinct = function(s, t) {
     
     var ls = s.length;
     var lt = t.length;
-    if(ls === 0){
-        if(lt === 0)    return 1;
-        if(lt !== 0)    return 0;
-    }
+    
+    if(ls === 0 && lt !== 0) return 0;
     
     var dp = [];
     for(let i = 0; i <= ls; i++){
-        dp.push([]);
-        for(let j = 0; j <= lt; j++){
-            dp[i].push(0);
-        }
+        dp[i] = [];
+        for(let j = 0; j <= lt; j++)
+            dp[i][j] = 0;
     }
     
-    for(let i = 0; i <= ls; i++)
+    dp[0][0] = 1;
+    for(let i = 1; i <= ls; i++)
         dp[i][0] = 1;
+    for(let i = 1; i <= lt; i++)
+        dp[0][i] = 0;
         
     for(let i = 1; i <= ls; i++){
         for(let j = 1; j <= lt; j++){
-            if(s[i-1] !== t[j-1]){
+            if(s[i-1] !== t[j-1])
                 dp[i][j] = dp[i-1][j];
-            }
-            else{
-                dp[i][j] = dp[i-1][j-1] + dp[i-1][j]
-            }
+            else
+                dp[i][j] = dp[i-1][j-1] + dp[i-1][j];
         }
     }
     
