@@ -25,7 +25,11 @@ var isMatch = function(s, p) {
             if(p[j-1] === '.' || p[j-1] == s[i-1])
                 dp[i][j] = dp[i-1][j-1];
             else if(p[j-1] === '*')
-                dp[i][j] = dp[i][j-2] || (dp[i-1][j] && (p[j-2] === '.' || p[j-2] == s[i-1]));
+                dp[i][j] = dp[i][j-2] || 
+                           // * combine with previous one char, stands for ""
+                           (dp[i-1][j] && (p[j-2] === '.' || p[j-2] == s[i-1])); 
+                           // * combine with previous char, stands for at least one previous
+                           //note its dp[i-1][j], not dp[i-1][j-1], because we need to make sure the * at p[j-1] is already covered
         }
     }
     // console.log(dp)
