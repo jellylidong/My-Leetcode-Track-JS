@@ -38,36 +38,52 @@ var numSquares = function(n) {
     
     
     //method 3 BFS
-    var sqrSet = []; //all sqr numbers that are <= n
-    var count = new Map(); // key:num, val:min sqr count
-    for(let i = 0; i*i <= n; i++){
-        sqrSet.push(i*i);
-        count.set(i*i, 1);
-    }
-    if(count.has(n))    return 1;
-    var q = [];
-    sqrSet.forEach(function(value){q.push(value)});//the first level is the numbers in sqrSet
-    var curCount = 1;
+    // var sqrSet = []; //all sqr numbers that are <= n
+    // var count = new Map(); // key:num, val:min sqr count
+    // for(let i = 0; i*i <= n; i++){
+    //     sqrSet.push(i*i);
+    //     count.set(i*i, 1);
+    // }
+    // if(count.has(n))    return 1;
+    // var q = [];
+    // sqrSet.forEach(function(value){q.push(value)});//the first level is the numbers in sqrSet
+    // var curCount = 1;
     
-    //n must be composed of the numbers in sqrSet
-    while(q.length > 0){
-        curCount++;// for every level, add the count
-        var len = q.length;
-        for(let i = 0; i < len; i++){
-            var num = q.shift();
+    // //n must be composed of the numbers in sqrSet
+    // while(q.length > 0){
+    //     curCount++;// for every level, add the count
+    //     var len = q.length;
+    //     for(let i = 0; i < len; i++){
+    //         var num = q.shift();
             
-            //for each number in the q, sum = num + number of the sqrSet is the next numbers in the q
-            //(if sum == n, return curCount, if sum < n, put sum to q and put sum and curCount to countMap, if sum > n, stop going down)
-            for(let j = 0; j < sqrSet.length; j++){
-                var value = sqrSet[j];
-                if(num + value === n)   return curCount;
-                else if(num+value < n && !count.has(num+value)){
-                    count.set(num+value, curCount);
-                    q.push(num+value);
-                }
-                else if(num+value > n){  break;}
-            }
+    //         //for each number in the q, sum = num + number of the sqrSet is the next numbers in the q
+    //         //(if sum == n, return curCount, if sum < n, put sum to q and put sum and curCount to countMap, if sum > n, stop going down)
+    //         for(let j = 0; j < sqrSet.length; j++){
+    //             var value = sqrSet[j];
+    //             if(num + value === n)   return curCount;
+                    //the first time num+value appears, we use curCount steps, 
+                    //any later appear of this value uses more steps
+                    //so curCount is the min step
+    //             else if(num+value < n && !count.has(num+value)){
+    //                 count.set(num+value, curCount);
+    //                 q.push(num+value);
+    //             }
+    //             else if(num+value > n){  break;}
+    //         }
+    //     }
+    // }
+    // return 0;
+    
+    //just re-type for reviewing
+    var dp = []
+    for(let i = 0; i <= n; i++)
+        dp[i] = Number.MAX_VALUE;
+        
+    dp[0] = 0;
+    for(let i = 0; i <= n; i++){
+        for(let j = 1; i + j*j <= n; j++){
+            dp[i+j*j] = Math.min(dp[i+j*j], 1+dp[i]);
         }
     }
-    return 0;
+    return dp[n];
 };
