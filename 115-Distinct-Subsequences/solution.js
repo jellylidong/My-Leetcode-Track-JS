@@ -36,8 +36,8 @@ var numDistinct = function(s, t) {
     dp[0][0] = 1;
     for(let i = 1; i <= ls; i++)
         dp[i][0] = 1;
-    for(let i = 1; i <= lt; i++)
-        dp[0][i] = 0;
+    // for(let i = 1; i <= lt; i++)
+    //     dp[0][i] = 0;
         
     for(let i = 1; i <= ls; i++){
         for(let j = 1; j <= lt; j++){
