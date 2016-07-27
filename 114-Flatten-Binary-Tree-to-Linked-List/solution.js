@@ -13,15 +13,17 @@ var flatten = function(root) {
     //preorder
     var pre = null;
     var helper = function(root){
-        if(root === null)    return null;
+        if(root === null) return null;
         var left = root.left;
         var right = root.right;
         root.left = null;
-        if(left !== null)   root.right = helper(left);
-        else pre = root;
-        pre.right = helper(right)
-        
+        if(left !== null)
+            root.right = helper(left);
+        else
+            pre = root;
+        pre.right = helper(right);
         return root;
-    }
+    };
+    
     helper(root);
 };
