@@ -26,7 +26,7 @@ public class HitCounter {
     public int getHits(int timestamp) {
         int total = 0;
         for(int i = 0; i < 300; i++){
-            if(times[i] <= timestamp && times[i] >= timestamp-300+1)
+            if(timestamp - times[i] < 300)
                 total += count[i];
         }
         return total;
