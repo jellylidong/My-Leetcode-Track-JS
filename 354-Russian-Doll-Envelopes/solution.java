@@ -3,8 +3,8 @@ public class Solution {
         Arrays.sort(envelopes, new Comparator<int[]>(){
             @Override
             public int compare(int[] arr1, int[] arr2){
-                if(arr1[0] != arr2[0])  return arr1[0]-arr2[0];
-                else    return arr2[1] - arr1[1];
+                if(arr1[0] != arr2[0])  return arr1[0]-arr2[0]; // scending W
+                else    return arr2[1] - arr1[1];//descending L
             }
         });
         
