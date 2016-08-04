@@ -1,4 +1,18 @@
 public class Solution {
+    
+    /*
+    start from a building (ie grid[i][j] == 1)
+    BFS all its empty neighbors (ie grid[i][j] == 0)
+    for each level of BFS, the level number is the ditance from the build to current position
+    meanwhile,  we need to maintain a timeVisited array to memorize how many times current position is visited
+    if grid[i][j] == 0  and timeVisited[i][j] == number of buildings
+    it means current empty position is accessible to all buildings
+    
+    besides, we also need to declare a new visited array 
+    to memorize if current positon has been visited evert time we need to start a new BFS
+    to avoid going back
+    */
+    
     public int shortestDistance(int[][] grid) {
         int m = grid.length;
         if(m == 0)  return 0;
