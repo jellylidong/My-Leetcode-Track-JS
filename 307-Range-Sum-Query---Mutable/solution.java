@@ -25,7 +25,7 @@ public class NumArray {
     }
     
     public segmentTree genTree(int[] nums, int lo, int hi){
-        if(lo > hi) return null;
+        if(lo > hi) return null; // must have this condition, otherwise TLE
         segmentTree root = new segmentTree(lo, hi);
         if(lo == hi)    root.sum = nums[lo];
         else{
@@ -54,7 +54,7 @@ public class NumArray {
         else{
             int mid = root.lo + (root.hi-root.lo)/2;
             if(hi <= mid)   return sumRange(root.left, lo, hi);
-            else if(lo >= mid+1)  return sumRange(root.right, lo, hi);
+            else if(lo >= mid+1)  return sumRange(root.right, lo, hi);//note it's lo >= mid+1 here
             else    return sumRange(root.left, lo, mid) + sumRange(root.right, mid+1, hi);
         }
     }
