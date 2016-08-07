@@ -1,6 +1,9 @@
 public class TicTacToe {
 
     /** Initialize your data structure here. */
+    //when we want to know numbers in a row, col, diagnal or anti_diagnal are the same
+    //instead of check numbers one by one
+    //we can check their sum
     int[] rowSum;
     int[] colSum;
     int diag, anti_diag;
