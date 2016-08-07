@@ -1,9 +1,16 @@
 public class TicTacToe {
 
     /** Initialize your data structure here. */
-    int[][] grid;
+    int[] rowSum;
+    int[] colSum;
+    int diag, anti_diag;
+    int len;
     public TicTacToe(int n) {
-        grid = new int[n][n];
+        rowSum = new int[n];
+        colSum = new int[n];
+        diag = 0;
+        anti_diag = 0;
+        len = n;
     }
     
     /** Player {player} makes a move at ({row}, {col}).
@@ -15,52 +22,24 @@ public class TicTacToe {
                 1: Player 1 wins.
                 2: Player 2 wins. */
     public int move(int row, int col, int player) {
-        grid[row][col] = player;
-        // for(int i = 0; i < 3; i++){
-        //     for(int j = 0; j < 3; j++)
-        //         System.out.print(grid[i][j] + " ");
-        //     System.out.println();
-        // }
-        if(check(row, col, player))
-            return player;
-        else
-            return 0;
-    }
-    
-    public boolean check(int row, int col, int player){
-        boolean win = false;
-        int i = 0;
-        for(i = 0; i < grid[0].length; i++){
-            if(grid[row][i] != player){  
-                break;
-            }
+        rowSum[row] += player == 1? -1:1;
+        colSum[col] += player == 1? -1:1;
+        if(row == col)
+            diag += player == 1? -1:1;
+        if(row == len-1-col)
+            anti_diag += player == 1? -1:1;
+        
+        if(player == 1){
+            if(rowSum[row] == -len || colSum[col] == -len ||
+             (row == col && diag == -len) || (row == len-1-col && anti_diag == -len))
+                return player;
         }
-        win = win || (i == grid.length);
-        if(!win){
-            for(i = 0; i < grid.length; i++){
-                if(grid[i][col] != player){
-                    break;
-                }
-            }
-            win = win || (i == grid.length);
+        if(player == 2){
+            if(rowSum[row] == len || colSum[col] == len ||
+             (row == col && diag == len) || (row == len-1-col && anti_diag == len))
+                return player;
         }
-        if(!win && row == col){
-            for(i = 0; i < grid.length; i++){
-                if(grid[i][i] != player){
-                    break;
-                }
-            }
-            win = win || (i == grid.length);
-        }
-        if(!win && row == grid.length-col-1){
-            for(i = 0; i < grid.length; i++){
-                if(grid[i][grid.length-1-i] != player){
-                    break;
-                }
-            }
-            win = win || (i == grid.length);
-        }
-        return win;
+        return 0;
     }
 }
 
