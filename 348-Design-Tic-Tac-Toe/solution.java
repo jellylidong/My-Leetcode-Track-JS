@@ -23,22 +23,20 @@ public class TicTacToe {
                 2: Player 2 wins. */
     public int move(int row, int col, int player) {
         rowSum[row] += player == 1? -1:1;
-        colSum[col] += player == 1? -1:1;
-        if(row == col)
-            diag += player == 1? -1:1;
-        if(row == len-1-col)
-            anti_diag += player == 1? -1:1;
+        if(Math.abs(rowSum[row]) == len)    return player;
         
-        if(player == 1){
-            if(rowSum[row] == -len || colSum[col] == -len ||
-             (row == col && diag == -len) || (row == len-1-col && anti_diag == -len))
-                return player;
+        colSum[col] += player == 1? -1:1;
+        if(Math.abs(colSum[col]) == len)    return player;
+        if(row == col){
+            diag += player == 1? -1:1;
+            if(Math.abs(diag) == len)   return player;
         }
-        if(player == 2){
-            if(rowSum[row] == len || colSum[col] == len ||
-             (row == col && diag == len) || (row == len-1-col && anti_diag == len))
-                return player;
+        if(row == len-1-col){
+            anti_diag += player == 1? -1:1;
+            if(Math.abs(anti_diag) == len)  return player;
         }
+        
+        
         return 0;
     }
 }
