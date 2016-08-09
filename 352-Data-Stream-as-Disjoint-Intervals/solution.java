@@ -34,7 +34,7 @@ public class SummaryRanges {
                 lo.getValue().end = val;
                 return;
             }
-            if(lo.getValue().start == val || lo.getValue().end == val || (lo.getValue().start <= val && lo.getValue().end >= val))
+            if(lo.getValue().start == val || lo.getValue().end == val || (lo.getValue().start < val && lo.getValue().end > val))
                 return;
         }
         if(hi != null){
@@ -42,7 +42,7 @@ public class SummaryRanges {
                 hi.getValue().start = val;
                 return;
             }
-            if(hi.getValue().start == val || hi.getValue().end == val || (hi.getValue().start <= val && hi.getValue().end >= val))
+            if(hi.getValue().start == val || hi.getValue().end == val || (hi.getValue().start < val && hi.getValue().end > val))
                 return;
         }
         
