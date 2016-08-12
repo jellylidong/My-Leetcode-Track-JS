@@ -4,19 +4,23 @@ public class MovingAverage {
     int size;
     int count;
     int sum;
-    Queue<Integer> q;
+    int index;
+    int[] nums;
     public MovingAverage(int size) {
         this.size = size;
         this.count = 0;
         this.sum = 0;
-        this.q = new LinkedList<>();
+        this.index = 0;
+        this.nums = new int[size];
     }
     
     public double next(int val) {
-        if(q.size() == size){
-            sum -= q.poll();
+        if(index == size){
+            index = 0;
         }
-        q.offer(val);
+        sum -= nums[index];
+        nums[index] = val;
+        index++;
         sum += val;
         if(count < size)    count++;
         return (double)sum/count;
