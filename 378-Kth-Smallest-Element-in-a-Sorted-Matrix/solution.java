@@ -19,9 +19,9 @@ public class Solution {
                 return cur.val;
             if(cur.col+1 < matrix[0].length){
                 pq.offer(new Pair(cur.row, cur.col+1, matrix));
-                if(cur.col == 0 && cur.row+1 < matrix.length)
-                    pq.offer(new Pair(cur.row+1, 0, matrix));
             }
+            if(cur.col == 0 && cur.row+1 < matrix.length)
+                pq.offer(new Pair(cur.row+1, 0, matrix));
             
         }
     }
