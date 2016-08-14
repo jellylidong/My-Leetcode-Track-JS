@@ -1,4 +1,9 @@
 public class Solution {
+    
+    //corner cases
+    //when n == int_min, -int_min gets overflow
+    //n == 0, we can return 1 only when x != 0
+
     public double myPow(double x, int n) {
         return helper(x, n);
     }
