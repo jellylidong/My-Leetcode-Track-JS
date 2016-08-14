@@ -7,16 +7,18 @@ public class Solution {
         int e = 0;
         for(; e < str.length(); e++){
             char c = str.charAt(e);
-            if(!map.containsKey(c)) map.put(c, 1);
-            else map.put(c, map.get(c)+1);
-            
+            map.put(c, e);
             if(map.size() > 2){
-                for(; map.size() > 2; s++){
-                    char c2 = str.charAt(s);
-                    map.put(c2, map.get(c2)-1);
-                    if(map.get(c2) == 0)
-                        map.remove(c2);
+                char minKey = 'a';
+                int minValue = Integer.MAX_VALUE;
+                for(Map.Entry<Character, Integer> entry: map.entrySet()){
+                    if(minValue > entry.getValue()){
+                        minValue = entry.getValue();
+                        minKey = entry.getKey();
+                    }
                 }
+                s = minValue+1;
+                map.remove(minKey);
             }
             
             max = Math.max(max, e-s+1);
