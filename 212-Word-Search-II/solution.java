@@ -45,7 +45,10 @@ public class Solution {
     
     public void search(char[][] board, boolean[][] visited, int i, int j, Trie cur, HashSet<String> ansSet){
         if(cur == null)    return;
-        if(cur.isStr)   ansSet.add(cur.str);
+        if(cur.isStr){
+            cur.isStr = false;
+            ansSet.add(cur.str);
+        }
         
         if(i < 0 || i == board.length || j < 0 || j == board[0].length) return;
         if(visited[i][j])   return;
