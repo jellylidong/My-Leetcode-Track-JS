@@ -26,7 +26,7 @@ public class Solution {
         
         int num1 = nums[i-1]+1;
         int num2 = upper;
-        if(num1 <= num2)
+        if(num1 <= num2) //for case lower=-1, upper=-1, nums={-1}, we must make sure num1 <= num2
             ans.add(num1 == num2? num1+"":num1+"->"+num2);
         
         return ans;
