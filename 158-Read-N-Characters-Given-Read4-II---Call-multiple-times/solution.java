@@ -28,7 +28,7 @@ public class Solution extends Reader4 {
                 bufId++;
                 tmpBufId++;
             }
-            if(tmpBufId >= readCount)
+            if(tmpBufId == readCount)
                 tmpBufId = 0;
         }
         
