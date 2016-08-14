@@ -1,5 +1,13 @@
 public class ValidWordAbbr {
 
+    //one tip to optimize it
+    //instead of storing all words with the same abbreviation to a set
+    //we can use a hashmap<abbr, original_string>
+    //once we know the abbr is not unique while adding abbr from the dictionary
+    //we do: map.put(abbr, "")
+    //then when checking isUnique
+    //if map does not contains the abbr, it's unique
+    //or if map contains the abbr but map.get(abbr) is not equal to current word, it's not unique
     HashMap<String, HashSet<String>> map; //key:abbr, value:set of strings with the key abbr
     public ValidWordAbbr(String[] dictionary) {
         map = new HashMap<>();
