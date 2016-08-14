@@ -13,11 +13,11 @@ public class Solution {
         
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){
-                search(board, visited, i, j, root, ansSet);
+                search(board, visited, i, j, root, ans);
             }
         }
         
-        ans.addAll(ansSet);
+        // ans.addAll(ansSet);
         return ans;
     }
     
@@ -43,11 +43,37 @@ public class Solution {
         cur.str = str;
     }
     
-    public void search(char[][] board, boolean[][] visited, int i, int j, Trie cur, HashSet<String> ansSet){
+    // public void search(char[][] board, boolean[][] visited, int i, int j, Trie cur, HashSet<String> ansSet){
+    //     if(cur == null)    return;
+    //     if(cur.isStr){
+            
+    //         ansSet.add(cur.str);
+    //         cur.isStr = false;
+    //         //change cur.isStr to false after we add it to answer so that we don't have to add it again
+    //         //once we can avoid add dup, we can add string to list directly instead of HashSet
+    //     }
+        
+    //     if(i < 0 || i == board.length || j < 0 || j == board[0].length) return;
+    //     if(visited[i][j])   return;
+        
+        
+        
+    //     visited[i][j] = true;
+    //     search(board, visited, i-1, j, cur.curChar[board[i][j]-'a'], ansSet);
+    //     search(board, visited, i+1, j, cur.curChar[board[i][j]-'a'], ansSet);
+    //     search(board, visited, i, j-1, cur.curChar[board[i][j]-'a'], ansSet);
+    //     search(board, visited, i, j+1, cur.curChar[board[i][j]-'a'], ansSet);
+    //     visited[i][j] = false;
+    // }
+    
+    public void search(char[][] board, boolean[][] visited, int i, int j, Trie cur, List<String> ansSet){
         if(cur == null)    return;
         if(cur.isStr){
-            cur.isStr = false;
+            
             ansSet.add(cur.str);
+            cur.isStr = false;
+            //change cur.isStr to false after we add it to answer so that we don't have to add it again
+            //once we can avoid add dup, we can add string to list directly instead of HashSet
         }
         
         if(i < 0 || i == board.length || j < 0 || j == board[0].length) return;
