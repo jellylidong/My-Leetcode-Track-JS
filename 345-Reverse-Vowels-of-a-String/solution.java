@@ -22,6 +22,7 @@ public class Solution {
     }
     
     public boolean isV(char c){
+        //don't forget it can be upper letter
         return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ||
                c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U';
     }
