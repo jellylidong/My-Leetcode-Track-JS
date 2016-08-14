@@ -4,12 +4,8 @@ public class ValidWordAbbr {
     public ValidWordAbbr(String[] dictionary) {
         map = new HashMap<>();
         for(String s: dictionary){
-            if(s.length() <= 2){
-                HashSet<String> set = new HashSet<>();
-                set.add(s);
-                map.put(s, set);
-            } 
-            else{
+            if(s.length() > 2){
+                
                 int len = s.length();
                 String abbr = "" + s.charAt(0) + (len-2) + s.charAt(len-1);
                 if(!map.containsKey(abbr)){
