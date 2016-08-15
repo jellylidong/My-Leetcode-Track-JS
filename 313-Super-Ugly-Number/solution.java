@@ -21,7 +21,9 @@ public class Solution {
             ans[i] = next;
             while(pq.peek()[0] == next){
                 int[] cur = pq.poll();
-                pq.offer(new int[] {cur[2]*ans[cur[1]], cur[1]+1, cur[2]});
+                cur[0] = cur[2]*ans[cur[1]];
+                cur[1] = cur[1]+1;
+                pq.offer(cur);
             }
         }
         
