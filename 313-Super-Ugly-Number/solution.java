@@ -1,20 +1,27 @@
 public class Solution {
     public int nthSuperUglyNumber(int n, int[] primes) {
+        
+        PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]>(){
+            @Override
+            public int compare(int[] n1, int[] n2){
+                return n1[0] - n2[0];
+            }
+            //n[0] current value, n[1] current index, n[2] base value
+        });
+        
         int[] ans = new int[n];
-        int[] ids = new int[primes.length];
         ans[0] = 1;
         
+        for(int i = 0; i < primes.length; i++){
+            pq.offer(new int[] {primes[i], 0, primes[i]});
+        }
+        
         for(int i = 1; i < n; i++){
-            int next = Integer.MAX_VALUE;
-            for(int j = 0; j < primes.length; j++){
-                next = Math.min(next, ans[ids[j]]*primes[j]);
-            }
-            
+            int next = pq.peek()[0];
             ans[i] = next;
-            
-            for(int j = 0; j < primes.length; j++){
-                if(ans[i] == ans[ids[j]]*primes[j])
-                    ids[j]++;
+            while(pq.peek()[0] == next){
+                int[] cur = pq.poll();
+                pq.offer(new int[] {cur[2]*ans[cur[1]], cur[1]+1, cur[2]});
             }
         }
         
