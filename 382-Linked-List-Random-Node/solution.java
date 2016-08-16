@@ -24,6 +24,9 @@ public class Solution {
         
         for(int i = 1; cur != null; i++){
             if(randGen.nextInt(i) == 0){
+                //the possibility of ranGen.nextInt() == 0 is 1/i
+                //so when i reach n (cur reach the end of list)
+                //the res is choosen with possibility 1/n
                 res = cur;
             }
             cur = cur.next;
