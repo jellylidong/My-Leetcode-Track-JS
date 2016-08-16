@@ -37,9 +37,9 @@ public class SnakeGame {
         int j = Integer.parseInt(curP[1]);
         
         if(dir.equals("U")) i--;
-        if(dir.equals("D")) i++;
-        if(dir.equals("L")) j--;
-        if(dir.equals("R")) j++;
+        else if(dir.equals("D")) i++;
+        else if(dir.equals("L")) j--;
+        else if(dir.equals("R")) j++;
         
         if(i < 0 || i == height || j < 0 || j == width){
             //taken.contains(i+"-"+j) does not necessarily means it's invalid
