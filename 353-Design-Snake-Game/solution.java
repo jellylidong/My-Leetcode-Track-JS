@@ -1,98 +1,66 @@
 public class SnakeGame {
 
-    /** Initialize your data structure here.
-        @param width - screen width
-        @param height - screen height 
-        @param food - A list of food positions
-        E.g food = [[1,1], [1,0]] means the first food is positioned at [1,1], the second is at [1,0]. */
-    
-    HashSet<String> taken;
-    Deque<String> snake;
-    int[][] food;
-    int foodId;
-    int width, height;
+    //2D position info is encoded to 1D and stored as two copies 
+    Set<Integer> set; // this copy is good for fast loop-up for eating body case
+    Deque<Integer> body; // this copy is good for updating tail
     int score;
+    int[][] food;
+    int foodIndex;
+    int width;
+    int height;
+    
     public SnakeGame(int width, int height, int[][] food) {
-        this.taken = new HashSet<>();
-        this.snake = new LinkedList<>();
-        snake.offer(0+"-"+0);
-        taken.add(0+"-"+0);
-        
-        this.food = food;
-        this.foodId = 0;
-        
         this.width = width;
         this.height = height;
-        this.score = 0;
+        this.food = food;
+        set = new HashSet<>();
+        set.add(0); //intially at [0][0]
+        body = new LinkedList<>();
+        body.offerLast(0);
     }
     
-    /** Moves the snake.
-        @param direction - 'U' = Up, 'L' = Left, 'R' = Right, 'D' = Down 
-        @return The game's score after the move. Return -1 if game over. 
-        Game over when snake crosses the screen boundary or bites its body. */
-    public int move(String dir) {
-        if(score == -1) return -1;
-        String[] curP = snake.peek().split("-");
-        int i = Integer.parseInt(curP[0]);
-        int j = Integer.parseInt(curP[1]);
-        
-        if(dir.equals("U")) i--;
-        else if(dir.equals("D")) i++;
-        else if(dir.equals("L")) j--;
-        else if(dir.equals("R")) j++;
-        
-        if(i < 0 || i == height || j < 0 || j == width){
-            //taken.contains(i+"-"+j) does not necessarily means it's invalid
-            // ht
-            // tt  if we need to move down here, it's invalid  
-            score = -1;
+  
+    public int move(String direction) {
+        //case 0: game already over: do nothing
+        if (score == -1) {
             return -1;
         }
         
-        
-        
-        // snake.offerFirst(i+"-"+j);
-        // taken.add(i+"-"+j);
-        // if(foodId < food.length && (food[foodId][0] == i && food[foodId][1] == j)){
-        //     foodId++;
-        //     score++;
-        // }
-        // else{
-        //     String toRm = snake.pollLast();
-        //     taken.remove(toRm);
-        // }
-        
-        String toRm = snake.pollLast();
-        taken.remove(toRm);
-        String toAdd = i+"-"+j;
-        if(toRm.equals(toAdd)){
-            snake.offerFirst(toAdd);
-            taken.add(toAdd);
-            return score;
+        // compute new head
+        int rowHead = body.peekFirst() / width;
+        int colHead = body.peekFirst() % width;
+        switch (direction) {
+            case "U" : rowHead--;
+                       break;
+            case "D" : rowHead++;
+                       break;
+            case "L" : colHead--;
+                       break;
+            default :  colHead++;
         }
-        else if(taken.contains(toAdd)){
-            score = -1;
+        int head = rowHead * width + colHead;
+        
+        //case 1: out of boundary or eating body
+        set.remove(body.peekLast()); // new head is legal to be in old tail's position, remove from set temporarily 
+        if (rowHead < 0 || rowHead == height || colHead < 0 || colHead == width || set.contains(head)) {
+            return score = -1;
         }
-        else{
-            snake.offerFirst(toAdd);
-            taken.add(toAdd);
-            if(foodId < food.length && (food[foodId][0] == i && food[foodId][1] == j)){
-                foodId++;
-                score++;
-                snake.add(toRm);
-                taken.add(toRm);
-            }
+        
+        // add head for case2 and case3
+        set.add(head); 
+        body.offerFirst(head);
+        
+        //case2: eating food, keep tail, add head
+        if (foodIndex < food.length && rowHead == food[foodIndex][0] && colHead == food[foodIndex][1]) {
+            set.add(body.peekLast()); // old tail does not change, so add it back to set
+            foodIndex++;
+            return ++score;
         }
-            
         
-        
-        
+        //case3: normal move, remove tail, add head
+        body.pollLast();
         return score;
+        
     }
 }
 
-/**
- * Your SnakeGame object will be instantiated and called as such:
- * SnakeGame obj = new SnakeGame(width, height, food);
- * int param_1 = obj.move(direction);
- */
