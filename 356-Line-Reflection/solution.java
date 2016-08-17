@@ -12,9 +12,11 @@ public class Solution {
             set.add(p[0]+"-"+p[1]);
         }
         
-        int m = (min+max)/2;
+        // int m = (min+max)/2;
         for(int[] p: points){
             // String newS = (p[0]>= m? m-(p[0]-m): m+(m-p[0])) + ("-"+p[1]);
+            
+            //don't use (min+max)/2 get the mid, for case [0,0], [1,0], we can not get real mid
             String newS = (max+min-p[0]) + "-" + p[1];
             if(!set.contains(newS)) return false;
         }
