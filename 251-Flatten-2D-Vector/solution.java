@@ -1,31 +1,26 @@
 public class Vector2D implements Iterator<Integer> {
 
-    int i, j;
-    List<List<Integer>> vec2d;
+    Iterator out, in;
     public Vector2D(List<List<Integer>> vec2d) {
-        this.vec2d = vec2d;
-        this.i = 0;
-        this.j = 0;
+        this.out = vec2d.iterator();
+        if(this.out.hasNext()){
+            this.in = ((List<Integer>)this.out.next()).iterator();
+        }
+        else{
+            this.in = null;
+        }
     }
 
     @Override
     public Integer next() {
-        int res = vec2d.get(i).get(j);
-        if(j+1 < vec2d.get(i).size())   j++;
-        else{
-            i++;
-            j = 0;
-        }
-        return res;
+        return (Integer)in.next();
     }
 
     @Override
     public boolean hasNext() {
-        while(i < vec2d.size() && j == vec2d.get(i).size()){
-            j = 0;
-            i++;
-        }
-        return i < vec2d.size() && j < vec2d.get(i).size();
+        while(out.hasNext() && !in.hasNext())
+            in = ((List<Integer>)out.next()).iterator();
+        return in != null && in.hasNext();
     }
 }
 
