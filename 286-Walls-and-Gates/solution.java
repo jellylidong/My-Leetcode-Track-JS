@@ -9,12 +9,12 @@ public class Solution {
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){
                 if(rooms[i][j] == 0){
-                    visited[i][j] = true;
+                    // visited[i][j] = true;
                     helper(i+1, j, rooms, visited, 0);
                     helper(i-1, j, rooms, visited, 0);
                     helper(i, j+1, rooms, visited, 0);
                     helper(i, j-1, rooms, visited, 0);
-                    visited[i][j] = false;
+                    // visited[i][j] = false;
                 }
             }
         }
