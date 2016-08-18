@@ -5,36 +5,38 @@ public class Solution {
         int n = rooms[0].length;
         if(n == 0)  return;
         
-        boolean[][] visited = new boolean[m][n];
+        Queue<int[]> q = new LinkedList<>();
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){
-                if(rooms[i][j] == 0){
-                    // visited[i][j] = true;
-                    helper(i+1, j, rooms, visited, 0);
-                    helper(i-1, j, rooms, visited, 0);
-                    helper(i, j+1, rooms, visited, 0);
-                    helper(i, j-1, rooms, visited, 0);
-                    // visited[i][j] = false;
-                }
+                if(rooms[i][j] == 0)
+                    q.offer(new int[] {i, j});
             }
         }
-    }
-    
-    public void helper(int i, int j, int[][] rooms, boolean[][] visited, int pre){
-        if(i < 0 || i == rooms.length || j < 0 || j == rooms[0].length)
-            return;
-            
-        if(rooms[i][j] == -1 || rooms[i][j] == 0)   return;
-        if(visited[i][j])   return;
         
-        if(rooms[i][j] > pre+1){
-            rooms[i][j] = pre+1;
-            visited[i][j] = true;
-            helper(i+1, j, rooms, visited, pre+1);
-            helper(i-1, j, rooms, visited, pre+1);
-            helper(i, j+1, rooms, visited, pre+1);
-            helper(i, j-1, rooms, visited, pre+1);
-            visited[i][j] = false;
+        int inf = Integer.MAX_VALUE;
+        while(!q.isEmpty()){
+            int size = q.size();
+            for(int i = 0; i < size; i++){
+                int[] cur = q.poll();
+                int row = cur[0];
+                int col = cur[1];
+                if(row-1 >= 0 && rooms[row-1][col] == inf){
+                    rooms[row-1][col] = rooms[row][col]+1;
+                    q.offer(new int[] {row-1, col});
+                }
+                if(row+1 < m && rooms[row+1][col] == inf){
+                    rooms[row+1][col] = rooms[row][col]+1;
+                    q.offer(new int[] {row+1, col});
+                }
+                if(col-1 >= 0 && rooms[row][col-1] == inf){
+                    rooms[row][col-1] = rooms[row][col]+1;
+                    q.offer(new int[] {row, col-1});
+                }
+                if(col+1 < n && rooms[row][col+1] == inf){
+                    rooms[row][col+1] = rooms[row][col]+1;
+                    q.offer(new int[] {row, col+1});
+                }
+            }
         }
     }
 }
