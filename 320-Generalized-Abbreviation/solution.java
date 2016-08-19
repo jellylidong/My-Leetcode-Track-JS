@@ -5,6 +5,8 @@ public class Solution {
         return ans;
     }
     
+    //this can be optimized by using StringBuilder to store the cur
+    //after each dfs, we should remove the last char of the stringbuilder
     public void helper(List<String> ans, String word, String cur, int p, int count){
         if(p == word.length()){
             if(count > 0)   cur += count;
