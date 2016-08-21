@@ -46,3 +46,9 @@ randomSet.getRandom();
 <div id="tags" class="btn btn-xs btn-warning">Show Tags</div>
 
 <span class="hidebutton">[Array](/tag/array/) [Hash Table](/tag/hash-table/) [Design](/tag/design/)</span></div>
+
+<div>
+
+<div id="similar" class="btn btn-xs btn-warning">Show Similar Problems</div>
+
+<span class="hidebutton">[(H) Insert Delete GetRandom O(1) - Duplicates allowed](/problems/insert-delete-getrandom-o1-duplicates-allowed/)</span></div>
