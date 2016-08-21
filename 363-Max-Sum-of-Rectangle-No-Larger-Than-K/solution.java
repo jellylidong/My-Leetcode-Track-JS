@@ -61,7 +61,7 @@ public class Solution {
                     
                 int curSum = 0;
                 TreeSet<Integer> set = new TreeSet<>();
-                set.add(0);
+                set.add(curSum);
                 for(int sum: sums){
                     curSum += sum;
                     Integer num = set.ceiling(curSum-k);
