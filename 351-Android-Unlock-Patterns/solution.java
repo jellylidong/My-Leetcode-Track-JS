@@ -30,9 +30,9 @@ public class Solution {
         for(int i = 1; i <= 9; i++){
             //!!! remeber the dfs condition
             //1st make sure next position has not been visited
-            //2.1 we can go from current position to next position withough cover any other position
+            //2.1 we can go from current position to next position without covering any other position
             //e.g we go from 1 to 3, we have to go though 2, 
-            //so skip[i][j] == 0 means we can go from i to j without cover other position
+            //so skip[i][j] == 0 means we can go from i to j without covering other position
             //2.2 or we can go from i to j that covers other position, but this position is already taken
             //e.g we go from 1 to 3, if 2 is already taken, then we can go
             if(!visited[i] && (skip[curP][i] == 0 || visited[skip[curP][i]]))
