@@ -19,7 +19,7 @@ public class Solution {
         int n = grid[0].length;
         if(n == 0)  return 0;
         
-        int[][] distance = new int[m][n];
+        int[][] distance = new int[m][n]; //total distance to all buildings
         int[][] timeVisited = new int[m][n];
         
         int roomCount = 0; // number of rooms
