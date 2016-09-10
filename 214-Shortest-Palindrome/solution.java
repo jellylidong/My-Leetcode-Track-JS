@@ -1,52 +1,56 @@
 public class Solution {
     public String shortestPalindrome(String s) {
-        // if(s.length() == 0) return "";
         
-        // int[] kmpS = new int[s.length()];
-        // int j = 0;
-        // for(int i = 1; i < s.length(); i++){
-        //     if(s.charAt(i) == s.charAt(j)){
-        //         kmpS[i] = 1 + kmpS[i-1];
-        //         j++;
-        //     }
-        //     else{
-        //         while(j != 0 && s.charAt(i) != s.charAt(j))
-        //             j = kmpS[j-1];
-        //         if(s.charAt(i) == s.charAt(j)){
-        //             kmpS[i] = j+1;
-        //             j++;
-        //         }
-        //     }
-        // }
+        int[] pi = genPMT(s);
         
-        // String r = new StringBuilder(s).reverse().toString();
-        // int[] kmpR = new int[r.length()];
-        // j = 0;
-        // for(int i = 0; i < r.length(); i++){
-        //     if(s.charAt(j) == r.charAt(i)){
-        //         kmpR[i] = j==0? 1:kmpR[i-1]+1;
-        //         j++;
-        //     }
-        //     else{
-        //         while(j != 0 && s.charAt(j) != r.charAt(i))
-        //             j = kmpS[j-1];
-        //         if(s.charAt(j) == r.charAt(i)){
-        //             kmpR[i] = j+1;
-        //             j++;
-        //         }
-        //     }
-        // }
-        // return r.substring(0, r.length()-kmpR[r.length()-1]) + s;
-        int j = 0;
-        for(int i = s.length()-1; i >= 0; i--){
-            if(s.charAt(i) == s.charAt(j))
-                j++;
-        }
-        if(j == s.length()) return s;
+        String revs = new StringBuilder(s).reverse().toString();
+        int overlap = maxOverlap(revs, s, pi);
         
-        String suffix = s.substring(j);
-        return new StringBuilder(suffix).reverse().append(shortestPalindrome(s.substring(0, j))).append(suffix).toString();
+        return revs + s.substring(overlap);
     }
     
+    public int maxOverlap(String s1, String s2, int[] pi){
+        int begin = 0;
+        int matched = 0;
+        int len = s1.length();
+        
+        while(begin < len){
+            if(matched < len && s1.charAt(begin+matched) == s2.charAt(matched)){
+                matched++;
+                if(begin + matched == len)
+                    return matched;
+            }
+            else{
+                if(matched == 0)    begin++;
+                else{
+                    begin += matched - pi[matched-1];
+                    matched = pi[matched-1];
+                }
+            }
+        }
+        return 0;
+    }
     
+    public int[] genPMT(String s){
+        int begin = 1; //?
+        int matched = 0;
+        int len = s.length();
+        int[] pi = new int[len];
+        
+        while(begin + matched < len){
+            if(s.charAt(begin+matched) == s.charAt(matched)){
+                matched++;
+                pi[begin+matched-1] = matched;
+            }
+            else{
+                if(matched == 0)    begin++;
+                else{
+                    begin += matched - pi[matched-1];
+                    matched = pi[matched-1];
+                }
+            }
+        }
+        
+        return pi;
+    }
 }
