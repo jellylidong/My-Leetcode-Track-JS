@@ -15,10 +15,12 @@ public class Solution {
         for(int i = 0; i < query.length; i++){
             String s1 = query[i][0];
             String s2 = query[i][1];
-            Double res1 = dfs(s1, s2, map, visited);
-            Double res2 = null;
-            if(res1 == null)    res2 = dfs(s2, s1, map, visited);
-            ans[i] = res1 == null? (res2 == null? -1.0: 1.0/res2) : res1;
+            // Double res1 = dfs(s1, s2, map, visited);
+            // Double res2 = null;
+            // if(res1 == null)    res2 = dfs(s2, s1, map, visited);
+            // ans[i] = res1 == null? (res2 == null? -1.0: 1.0/res2) : res1;
+            Double res = dfs(s1, s2, map, visited);;
+            ans[i] = res == null? -1:res;
         }
         return ans;
     }
