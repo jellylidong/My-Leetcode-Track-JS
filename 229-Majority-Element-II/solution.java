@@ -32,7 +32,7 @@ public class Solution {
         count2 = 0;
         for(int i = 0; i < nums.length; i++){
             if(nums[i] == num1) count1++;
-            else if(nums[i] == num2) count2++;
+            else if(nums[i] == num2) count2++; //nums1 can be the same with num2
         }
         if(count1 > nums.length/3)  ans.add(num1);
         if(count2 > nums.length/3)  ans.add(num2);
