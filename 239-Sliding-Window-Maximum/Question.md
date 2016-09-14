@@ -1,6 +1,6 @@
 # 239. Sliding Window Maximum
 
-[Original Page](https://leetcode.com/problems/sliding-window-maximum/#)
+[Original Page](https://leetcode.com/problems/sliding-window-maximum/)
 
 Given an array _nums_, there is a sliding window of size _k_ which is moving from the very left of the array to the very right. You can only see the _k_ numbers in the window. Each time the sliding window moves right by one position.
 
