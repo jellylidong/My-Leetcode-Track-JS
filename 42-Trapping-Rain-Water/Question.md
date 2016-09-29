@@ -27,4 +27,4 @@ The above elevation map is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In th
 
 <div id="similar" class="btn btn-xs btn-warning">Show Similar Problems</div>
 
-<span class="hidebutton">[(M) Container With Most Water](/problems/container-with-most-water/) [(M) Product of Array Except Self](/problems/product-of-array-except-self/)</span></div>
+<span class="hidebutton">[(M) Container With Most Water](/problems/container-with-most-water/) [(M) Product of Array Except Self](/problems/product-of-array-except-self/) [(H) Trapping Rain Water II](/problems/trapping-rain-water-ii/)</span></div>
