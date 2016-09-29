@@ -1,36 +1,28 @@
 public class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
         if(nums.length == 0)    return new int[0];
-        int[] ans = new int[nums.length - k+1];
+        int maxIdx = -1;
+        int maxVal = Integer.MIN_VALUE;
         
-        int maxIndex = 0;
-        int max = nums[0];
-        for(int i = 0; i <= k-1; i++){
-            if(nums[i] >= max){
-                max = nums[i];
-                maxIndex = i;
-            }
-        }
-        ans[0] = max;
-        for(int i = 1; i <= nums.length-k; i++){
-            if(maxIndex >= i && maxIndex <= i+k-1){
-                if(nums[i+k-1] >= max){
-                    max = nums[i+k-1];
-                    maxIndex = i+k-1;
+        
+        int[] ans = new int[nums.length-k+1];
+        ans[0] = maxVal;
+        
+        for(int i = 0; i <= nums.length-k; i++){
+        	if(maxIdx < i){
+        	    maxVal = Integer.MIN_VALUE;
+        		for(int j = i; j < i+k; j++){
+                	if(nums[j] >= maxVal){
+                		maxVal = nums[j];
+                		maxIdx = j;
+                	}
                 }
-                ans[i] = max;
-            }
-            else{
-                max = nums[i];
-                maxIndex = i;
-                for(int j = i; j <= i+k-1; j++){
-                    if(nums[j] >= max){
-                        max = nums[j];
-                        maxIndex = j;
-                    }
-                }
-                ans[i] = max;
-            }
+        	}
+        	else if(nums[i+k-1] >= maxVal){
+        		maxVal = nums[i+k-1];
+        		maxIdx = i+k-1;
+        	}
+        	ans[i] = maxVal;
         }
         
         return ans;
