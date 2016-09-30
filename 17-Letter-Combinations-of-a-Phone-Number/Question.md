@@ -31,4 +31,4 @@ Although the above answer is in lexicographical order, your answer could be in a
 
 <div id="similar" class="btn btn-xs btn-warning">Show Similar Problems</div>
 
-<span class="hidebutton">[(M) Generate Parentheses](/problems/generate-parentheses/) [(M) Combination Sum](/problems/combination-sum/)</span></div>
+<span class="hidebutton">[(M) Generate Parentheses](/problems/generate-parentheses/) [(M) Combination Sum](/problems/combination-sum/) [(E) Binary Watch](/problems/binary-watch/)</span></div>
