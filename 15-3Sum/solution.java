@@ -20,8 +20,8 @@ public class Solution {
                     ans.add(list);
                     lo++;
                     hi--;
-                    while(lo > i+1 && lo < hi && nums[lo] == nums[lo-1]) lo++;
-                    while(hi < nums.length-1 && lo < hi && nums[hi] == nums[hi+1]) hi--;
+                    while(lo < hi && nums[lo] == nums[lo-1]) lo++;
+                    while(lo < hi && nums[hi] == nums[hi+1]) hi--;
                 }
             }
             
