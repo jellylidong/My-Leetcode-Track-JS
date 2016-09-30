@@ -29,6 +29,7 @@ public class RandomizedCollection {
             int pos = map.get(val).iterator().next();
             map.get(val).remove(pos);
             
+            //比如说先insert两个1，再remove两个1
             if(pos < list.size()-1){
                 int tail = list.get(list.size()-1);
                 list.set(pos, tail);
